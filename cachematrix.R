@@ -1,8 +1,5 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
+#This function takes a matrix object and returns a list of functions set, get, setinverse, getinverse. 
+#These functions within the encloser makeCacheMatrix function allows manipulation of matrix objet.
 makeCacheMatrix <- function(x = matrix()) {
   
   i <- NULL
