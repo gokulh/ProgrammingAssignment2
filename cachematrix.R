@@ -1,5 +1,6 @@
-#This function takes a matrix object and returns a list of functions set, get, setinverse, getinverse. 
-#These functions within the encloser makeCacheMatrix function allows manipulation of matrix objet.
+##This function takes a matrix object and returns a list of functions (set, get, setinverse, getinverse).
+##These functions functions allows manipulation of matrix object.
+## The <<- operator helps in maintaining state of the variable beyond the current environment/run.
 makeCacheMatrix <- function(x = matrix()) {
   
   i <- NULL
@@ -31,25 +32,29 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 ## Write a short comment describing this function
-
+##This function cacheSolve takes an object returned by the makeCacheMatrix function and computes the inverse.
+##This is done by using the solve function.
+##If the inverse of the matrix was not previosly computed then the inverse is computed the first time. 
+##It also updates the cache to hold values for subsequent requests.
+##if the inverse of the matrix in question exists, it returns the cached inverse and does not compute.
 cacheSolve <- function(x, ...) {
   
-  inv = x$getinv() #if the inv is already calculate get it.
+  i = x$getinverse() #if the inv is already calculate get it.
   
   #Check if the inv value from above line is not NULL. then return the value from above line.
-  if (!is.null(inv)){
+  if (!is.null(i)){
     # get it from the cache and skips the computation. 
     message("getting cached data")
-    return(inv)
+    return(i)
   }
   
   #Calculate the inverse using the solve fuction.
-  mat.data = x$get()
-  inv = solve(mat.data, ...)
+  mymatrix.data = x$get()
+  i = solve(mymatrix.data, ...)
   
-  #set the value of inv in cache. So it does not have to calculate again.
-  x$setinv(inv)
+  #set the value of i in cache. So it does not have to calculate again.
+  x$setinverse(i)
   
   #return the inv matrix
-  return(inv)
+  return(i)
 }
